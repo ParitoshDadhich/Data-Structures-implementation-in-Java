@@ -1,0 +1,65 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		int maze[][] = new int[n][n];
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				maze[i][j] = s.nextInt();
+			}
+		}
+		System.out.println(Solution.ratInAMaze(maze));	
+	}
+
+}
+
+
+public class Solution {
+	public static boolean ratInAMaze(int maze[][]){
+ 		int m = maze.length;
+        int n = maze[0].length;
+        int path[][] = new int[m][n];
+        
+        return helper(maze, path, 0, 0, m, n);
+    }
+    
+    private static boolean helper(int maze[][], int path[][], int i, int j, int m, int n){
+        if(i == m-1 && j == n-1){
+        	//path[i][j] = 1;
+            return true;
+        }
+        
+        // checking whether cordinates i.e. i and j are valid or not
+        if(i<0 || i>=m || j<0 || j>=n || maze[i][j]==0 || path[i][j]==1)
+            return false;
+        
+        // setting path to 1. it shows that we have gone through or included this path;
+        path[i][j] = 1;
+        
+        
+        //now we will go through all four direction to find the path;
+        
+        // top
+        if(helper(maze, path, i-1, j, m, n))
+            return true;
+        
+        // right
+        if(helper(maze, path, i, j+1, m, n))
+            return true;
+        
+        // dowm
+        if(helper(maze, path, i+1, j, m, n))
+            return true;
+        
+        // left
+        if(helper(maze, path, i, j-1, m, n))
+            return true;
+        
+        return false;
+        
+    }
+    
+}
