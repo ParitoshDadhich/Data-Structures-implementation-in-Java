@@ -1,0 +1,82 @@
+import java.util.Scanner;
+
+public class Runner {
+	
+	static Scanner s = new Scanner(System.in);
+	
+	public static int[] takeInput(){
+		int size = s.nextInt();
+		int[] input = new int[size];
+		for(int i = 0; i < size; i++){
+			input[i] = s.nextInt();
+		}
+		return input;
+	}
+	
+	public static void main(String[] args) {
+		int[] input = takeInput();
+		int x = s.nextInt();
+		System.out.println(Solution.lastIndex(input, x));
+	}
+}
+
+
+
+public class Solution {
+
+    static int ans = -1;
+	public static int lastIndex(int input[], int x) {
+		return lastIndex(input, x, 0);	 
+	}
+    /*
+    
+    method 1
+    // in this method we can compare in the starting also
+    // but i saved myself from getting negative value when element is not present in the remaining
+    // part expext first position
+    // because i simply call recursively but not taking value which recursive function returns;
+    
+    public static int lastIndex(int input[], int x, int startIndex)
+    {
+        if(startIndex == input.length)
+            return -1;
+        if(input[startIndex] == x)
+            ans = startIndex;
+        lastIndex(input, x, startIndex+1);
+        
+        return ans;
+    }
+    */
+    
+    public static int lastIndex(int input[], int x, int startIndex)
+    {
+        if(startIndex == input.length)
+            return -1;
+         
+        //  this is such an good example in the previous we compared first and then called recursive call
+        // but in this case we need to do compare after recursive only when the ans is negative. 
+        // because there might be posibility that the required number is present at the starting 
+        // only. 
+        // a question arises why we are not comparing initially and what will goona be happened?
+        
+        // answer is if we compared initially and we get the answer and when required element is 
+        // present in the remaining part we will get the index also
+        // but if the required element is not present then function wil return -1 and we have to 
+        // return -1 as a answer but the required element is present is present in the starting only.
+        
+        
+        
+        
+        ans = lastIndex(input, x, startIndex+1);
+        
+        if(ans<0)
+            if(x == input[startIndex])
+                ans = startIndex;
+        
+        
+        return ans;
+    }
+    
+    
+}
+
