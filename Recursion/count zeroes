@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class runner {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		System.out.println(solution.countZerosRec(n));
+	}
+}
+
+
+
+
+public class solution {
+  static int c=0;
+	public static int countZerosRec(int n){
+		
+        if(n == 0)
+            return 0;
+        if(n%10 == 0)
+            c++;
+        countZerosRec(n/10);
+        return c;
+        
+	}
+}
