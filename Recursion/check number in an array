@@ -1,0 +1,39 @@
+import java.util.Scanner;
+
+public class Runner {
+
+	static Scanner s = new Scanner(System.in);
+
+	public static void main(String[] args) {
+		int n = s.nextInt();
+		int input[] = new int[n];
+		for(int i = 0; i < n; i++) {
+			input[i] = s.nextInt();
+		}
+		int x = s.nextInt();
+		System.out.println(Solution.checkNumber(input, x));
+	}
+}
+
+
+
+public class Solution {
+	
+	public static boolean checkNumber(int input[], int x) {
+		    return checkNumber(input, 0, x);
+    }
+    
+    static boolean checkNumber(int a[], int SI, int x){
+        if(SI>=a.length)
+            return false;
+        
+         if(a[SI] == x)
+            return true;
+        return checkNumber(a, SI+1, x);
+         
+        
+    }
+    
+}
+
+
