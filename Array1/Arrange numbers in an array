@@ -1,0 +1,48 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Runner {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+
+    public static void printArray(int[] arr) {
+        for (int element : arr) {
+            System.out.print(element + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        int t = Integer.parseInt(br.readLine().trim());
+
+        while(t > 0) {
+            int n = Integer.parseInt(br.readLine());
+            int[] arr = new int[n];
+
+            Solution.arrange(arr, n);
+            printArray(arr);
+
+            t -= 1;
+        }
+    }
+}
+
+
+public class Solution {
+    
+    public static void arrange(int[] arr, int n) {
+    	int t = (n%2==0 ? n-1: n);
+        
+        int k=0;
+        for(int i=1; i<=t; i+=2, k++)
+            arr[k] = i;
+        
+        t = (n%2==0 ? n: n-1);
+        
+        for(int i=t; i>=2; i-=2, k++)
+            arr[k] = i;
+        
+    }
+}
