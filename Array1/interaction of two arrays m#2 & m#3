@@ -1,0 +1,92 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Runner {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    
+    public static int[] takeInput() throws IOException {
+        int size = Integer.parseInt(br.readLine().trim());
+        int[] input = new int[size];
+
+        if (size == 0) {
+            return input;
+        }
+        
+        String[] strNums; 
+        strNums = br.readLine().split("\\s");
+        
+
+        for (int i = 0; i < size; ++i) {
+            input[i] = Integer.parseInt(strNums[i]);
+        }
+
+        return input;
+    }
+
+
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        int t = Integer.parseInt(br.readLine().trim());
+
+        while(t > 0) {
+
+            int[] input1 = takeInput();
+            int[] input2 = takeInput();
+            Solution.intersections(input1, input2);
+            System.out.println();
+
+            t -= 1;
+        }
+    }
+}
+
+// method 2 
+// solved using without retainAll()
+
+import java.util.*;
+
+public class Solution{  
+    
+    public static void intersections(int arr1[], int arr2[]) {
+        
+        HashSet<Integer> hs = new HashSet<>();
+        for(int i : arr1)
+            hs.add(i);
+        
+        for(int i : arr2){
+            if(hs.contains(i)){
+                System.out.print(i + " ");
+                hs.remove(i);
+             }
+        }
+    }
+}
+
+
+// method 3
+// solved using retainAll() 
+/*
+import java.util.*;
+
+public class Solution{  
+    
+    public static void intersections(int arr1[], int arr2[]) {
+        
+        HashSet<Integer> hs1 = new HashSet<>();
+        for(int i : arr1)
+            hs1.add(i);
+        
+        HashSet<Integer> hs2 = new HashSet<>();
+        for(int i : arr1)
+            hs2.add(i);
+        
+        hs1.retainAll();
+        
+        for(int i: arr1)
+            System.out.print(i + " ");
+  
+    }
+}
+
+*/
