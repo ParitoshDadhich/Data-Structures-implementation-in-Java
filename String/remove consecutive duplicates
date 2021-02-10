@@ -1,0 +1,48 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
+public class Runner {
+
+	static BufferedReader br = new BufferedReader (new InputStreamReader (System.in));
+
+	public static void main (String [] args) throws NumberFormatException, IOException {
+		String str = br.readLine();
+		if (str != null) {
+			str = str.trim ();
+		} else {
+			str = "";
+		}
+
+		String ans = Solution.removeConsecutiveDuplicates(str);
+
+		System.out.println(ans);
+		
+	}
+}
+
+
+public class Solution {
+
+	public static String removeConsecutiveDuplicates(String str) {
+        if(str.length() == 0)
+            return "";
+        
+		int l = str.length();
+        String ans = str.charAt(0) + "";
+        int k = 0;
+        for(int i=1; i<l; i++){
+            if(str.length() > 1){
+                if(ans.charAt(k) != str.charAt(i)){
+                    ans += str.charAt(i);
+                    k++;
+                }
+            }
+        }
+        
+        
+        return ans;
+	}
+
+}
