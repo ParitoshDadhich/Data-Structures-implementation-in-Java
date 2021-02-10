@@ -1,0 +1,58 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+
+public class Runner {
+
+	static BufferedReader br = new BufferedReader (new InputStreamReader (System.in));
+
+	public static void main (String [] args) throws NumberFormatException, IOException {
+		String str = br.readLine ();
+		if (str != null) {
+			str = str.trim ();
+		} else {
+			str = "";
+		}
+
+		char ans = Solution.highestOccuringChar(str);
+
+		System.out.println(ans);
+		
+	}
+}
+
+
+public class Solution {
+
+	public static char highestOccuringChar(String str) {
+        
+        int l = str.length();
+        
+        if(l == 0)
+            return ' ';
+        
+        int max = Integer.MIN_VALUE;
+        char ch = str.charAt(0);
+        int count = 0;
+        
+        for(int i=0; i<l; i++){
+            count = 0;
+            for(int j=0; j<l; j++){
+                if(str.charAt(i) == str.charAt(j))
+                    count++;
+            }
+            
+            //System.out.println(count);
+            
+            if(count > max){
+                max = count;
+                ch = str.charAt(i);
+            }
+        }
+        
+        return ch;
+    }
+}
+
+
