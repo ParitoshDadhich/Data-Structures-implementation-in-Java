@@ -1,0 +1,101 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Runner {
+
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    
+    public static int[][] take2DInput() throws IOException {
+        int n = Integer.parseInt(br.readLine().trim());
+
+        if (n == 0) {
+            return new int[0][0];
+        }
+
+
+        int[][] mat = new int[n][n];
+
+        for (int row = 0; row < n; row++) {
+            String[] strNums; 
+            strNums = br.readLine().trim().split("\\s");
+            
+            for (int col = 0; col < n; col++) {
+                mat[row][col] = Integer.parseInt(strNums[col]);
+            }
+        }
+
+        return mat;
+    }
+
+
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        int t = Integer.parseInt(br.readLine().trim());
+
+        while(t > 0) {
+
+            int[][] mat = take2DInput();
+
+            Solution.totalSum(mat);
+            System.out.println();
+
+            t -= 1;
+        }
+    }
+}
+
+
+
+
+public class Solution {
+
+	public static void totalSum(int[][] arr) {
+        if(arr.length == 0){
+            System.out.println(0);
+            return;
+        }
+        
+		int sum = 0;
+        int m = arr.length;
+        int n = arr[0].length;
+        
+        // sum of diagonals elemtns;
+        for(int i=0; i<m; i++)
+            sum += arr[i][i] + arr[i][n-i-1];
+        if(m%2 != 0)
+            sum -= arr[m/2][m/2];
+
+/*        
+        // sum of upper boundary elements;
+        for(int i=1; i<m-1; i++)
+            sum += arr[0][i];
+        
+        // sum of left hand boundary elements;
+        for(int i=1; i<m-1; i++)
+            sum += arr[i][0];
+        
+        // sum of lower boundary elements;
+        for(int i=1; i<m-1; i++)
+            sum += arr[n-1][i];
+        
+        // sum of right hand boundary elements;
+        for(int i=1; i<m-1; i++)
+            sum += arr[i][n-1];
+*/
+        
+        // OR
+        
+        
+        for(int i=1; i<m-1; i++){
+            sum += arr[0][i];
+            sum += arr[i][0];
+            sum += arr[n-1][i];
+            sum += arr[i][n-1];
+        }
+        
+        
+        
+        System.out.println(sum);
+	}
+
+}
