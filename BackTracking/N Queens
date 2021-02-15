@@ -1,0 +1,83 @@
+// best question;
+
+import java.util.Scanner;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		Solution.placeNQueens(n);	
+	}
+
+}
+
+
+
+
+import java.util.*;
+
+public class Solution {
+	
+		
+public static void placeNQueens(int n){
+ 		int chess[][] = new int[n][n];
+    	printNQueens(chess, "", 0);
+	}
+    
+    // parameter -> level;
+    // col => options, calls;
+    
+    
+    private static void printNQueens(int chess[][], String qsf, int row){
+        
+        // base case;
+        if(row == chess.length){
+            int l = chess.length;
+            
+  		for(int i=0; i<l; i++){
+            for(int j=0; j<l; j++){
+                System.out.print(chess[i][j] + " ");
+            }
+           // System.out.println();
+        }
+            
+            System.out.println();
+            return;
+        }
+        
+        // operations;
+        for(int col=0; col<chess.length; col++){
+         	if(isQueenSafe(chess, row, col)){
+            	chess[row][col] = 1;
+            	printNQueens(chess, qsf + " " + row + " " + col, row+1);
+            	chess[row][col] = 0;
+            }
+        }
+    }
+    
+    private static boolean isQueenSafe(int chess[][], int row, int col){
+        int l = chess.length;
+        
+        // checking top
+        for(int i=row-1, j=col; i>=0; i--){
+            if(chess[i][j] == 1)
+                return false;
+        }
+        
+        // checking left diagonal
+        for(int i=row-1, j=col-1; j>=0 && i>=0; j--, i--){
+            if(chess[i][j] == 1)
+                return false;
+        }
+        
+        // checking right diagonal
+        for(int i=row-1, j=col+1; j<l && i>=0; i--, j++){
+            if(chess[i][j] == 1)
+                return false;
+        }
+        
+        return true;
+    }
+}
