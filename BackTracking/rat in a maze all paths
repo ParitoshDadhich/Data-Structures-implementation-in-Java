@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		int maze[][] = new int[n][n];
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				maze[i][j] = s.nextInt();
+			}
+		}
+		Solution.ratInAMaze(maze);	
+	}
+
+}
+
+
+
+public class Solution {	
+	public static void ratInAMaze(int maze[][]){
+		
+		int m = maze.length;
+        int n = maze[0].length;
+        int path[][] = new int[m][n];
+        printAllPath(maze, 0, 0, path);
+	}
+
+	private static void printAllPath(int maze[][], int i, int j, int path[][]){
+        int n = maze.length;
+        int m = maze[0].length;
+        
+        // handeling edges cases;
+        if(i<0 || j<0 || i>=n || j>=m || maze[i][j] == 0 || path[i][j] == 1)
+            return;
+        
+        // base case;
+        if(i == n-1 && j == m-1){
+            path[i][j] = 1;
+            for(int r=0; r<n; r++){
+                for(int c=0; c<m; c++)
+                    System.out.print(path[r][c] + " "); 
+                //System.out.println();
+            }
+            
+            System.out.println();
+           // path[i][j] = 0;
+            return;
+        }
+        
+        path[i][j] = 1;
+      
+        // visiting all possible paths;
+        
+        // top
+        printAllPath(maze, i-1, j, path);
+        // right
+        printAllPath(maze, i, j+1, path);
+        // down
+        printAllPath(maze, i+1, j, path);
+        // left
+        printAllPath(maze, i, j-1, path);
+        
+        // unmarking the visited positon;
+        path[i][i] = 0;
+        
+        return;
+    }
+	
+}
