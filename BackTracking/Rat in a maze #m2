@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		int maze[][] = new int[n][n];
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < n; j++){
+				maze[i][j] = s.nextInt();
+			}
+		}
+		System.out.println(Solution.ratInAMaze(maze));	
+	}
+
+}
+
+
+
+
+public class Solution {
+
+    static boolean flag = false;
+	public static boolean ratInAMaze(int maze[][]){
+		
+        int m = maze.length;
+        int n = maze[0].length;
+        int path[][] = new int[m][n];
+        flag = helper(maze, 0, 0, m, n, path);
+        return flag;
+	}
+    
+    
+    private static boolean helper(int maze[][], int i, int j, int m, int n, int path[][]){
+        if(i == m-1 && j == n-1){
+            path[i][j] = 1;
+            return true;
+        }
+        
+        int directions[][] = {{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+        int l = directions.length;
+        
+        if(i<0 || j<0 || i>=m || j>=n)
+            return flag;
+        
+        for(int k=0; k<l; k++){
+            int x = directions[k][0] + i;
+            int y = directions[k][1] + j;
+            
+            if(x>=0 && y>=0 && x<m && y<n){
+                if(path[x][y] == 0 && maze[x][y] == 1 && path[i][j] == 0 && maze[i][j] == 1){
+                    path[i][j] = 1;
+                    flag = helper(maze, x, y, m, n, path);
+                }
+            }
+            path[i][j] = 0;
+        }
+        
+        
+        for(int a=0; a<m; a++){
+            for(int =0; j<n; j++){
+                System.out.print(maze[a][b] + " ")
+            }
+            System.out.println();
+        }
+        
+        
+        return flag;
+    }
+    
+}
