@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class runner {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		String input = s.nextLine();
+		System.out.println(solution.removeX(input));
+	}
+}
+
+
+
+public class solution {
+
+	// Return the changed string
+	public static String removeX(String input){
+		return helper(input, "");
+	}
+    
+    private static String helper(String str, String ans){
+        if(str.length() ==0)
+            return ans;
+        
+        if(str.charAt(0) == 'x'){
+            ans = helper(str.substring(1), ans);
+        } else{
+            ans = helper(str.substring(1), ans);
+            ans = str.charAt(0) + ans;
+        }
+        
+        return ans;
+    }
+}
