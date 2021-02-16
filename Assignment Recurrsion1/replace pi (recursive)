@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class runner {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		String input = s.nextLine();
+		System.out.println(solution.replace(input));
+	}
+}
+
+
+public class solution {
+	public static String replace(String input){
+		return helper(input, "");
+	}
+    
+    private static String helper(String input, String ans){
+        if(input.length() == 0)
+            return ans;
+        
+        if(input.length() <=2){
+            if(input.equals("pi"))
+                return 3.14 + "";
+            else
+                return input;
+        }
+        
+        if(input.substring(0,2).equals("pi")){
+            ans = helper(input.substring(2), ans);
+            ans = 3.14 + ans;
+        } else{
+            ans = helper(input.substring(1), ans);
+            ans = input.charAt(0) + ans;
+        }
+        
+        return ans;
+    }
+}
