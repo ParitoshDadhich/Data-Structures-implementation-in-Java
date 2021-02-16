@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class runner {
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		String input = s.nextLine();
+		System.out.println(solution.convertStringToInt(input));
+	}
+}
+
+
+import java.util.*;
+
+public class solution {
+
+	public static int convertStringToInt(String input){
+		return helper(input, 0);
+	}
+    
+    private static int helper(String input, int ans){
+        int l = input.length();
+        
+        if(l == 0)
+            return ans;
+        
+        ans = helper(input.substring(1), ans);
+        
+        int firstDigit = input.charAt(0) - '0';
+        
+        return firstDigit * (int)Math.pow(10, l-1) + ans;
+    }
+}
