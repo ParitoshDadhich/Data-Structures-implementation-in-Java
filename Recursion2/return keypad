@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+public class runner {
+	
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int input = s.nextInt();
+		String output[] = solution.keypad(input);
+		for(int i = 0; i < output.length; i++) {
+			System.out.println(output[i]);
+		}
+	}
+}
+
+
+public class solution {
+
+	public static String[] keypad(int n){
+		if(n == 0){
+            String ans[] = {""};
+            return ans;
+        }
+        
+        String smallAns[] = keypad(n/10);
+        char ch[] = helper(n%10);
+        
+        String ans[];
+        int k = 0;
+        if(n%10 == 7 || n%10 == 9){
+            ans = new String[4*smallAns.length];
+            for(int i=0; i<4; i++){
+                for(int j=0; j<smallAns.length; j++, k++)
+                    ans[k] = ch[i] + smallAns[j];
+            }
+        } else{
+            ans = new String[3*smallAns.length];
+            for(int i=0; i<3; i++){
+                for(int j=0; j<smallAns.length; j++, k++)
+                    ans[k] = smallAns[j] + ch[i];
+            }
+        }
+        return ans;
+
+	}
+    
+    private static char[] helper(int n){
+        switch(n){
+            case 2:
+                return "abc".toCharArray();
+            case 3:
+                return "def".toCharArray();
+            case 4:
+                return "ghi".toCharArray();
+            case 5:
+               return "jkl".toCharArray();
+            case 6:
+                return "mno".toCharArray();
+            case 7:
+                return "pqrs".toCharArray();
+            case 8:
+                return "tuv".toCharArray();
+            case 9:
+                return "wxyz".toCharArray();
+            default:
+                char ch[] = {' '};
+                return ch;
+        }
+    }
+	
+}
