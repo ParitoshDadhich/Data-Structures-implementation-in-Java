@@ -1,0 +1,74 @@
+import java.util.Scanner;
+
+public class runner {
+	
+	public static void main(String[] args) {
+		Scanner s = new Scanner(System.in);
+		int input = s.nextInt();
+		solution.printKeypad(input);
+	}
+}
+
+
+public class solution {
+
+	public static void printKeypad(int n){
+        helper(n, "");
+	}
+    
+    private static void helper(int n, String outPutSoFar){
+        if(n == 0){
+            System.out.println(outPutSoFar);
+            return;
+        }
+        
+        int num = n%10;
+        char ch[] = characters(num);
+        if(num==7 || num==9){
+ 			helper(n/10, ch[0] + outPutSoFar);
+            helper(n/10, ch[1] + outPutSoFar);
+            helper(n/10, ch[2] + outPutSoFar);
+            helper(n/10, ch[3] + outPutSoFar);
+        } else{
+      		helper(n/10, ch[0] + outPutSoFar);
+            helper(n/10, ch[1] + outPutSoFar);
+            helper(n/10, ch[2] + outPutSoFar);
+        }
+    }
+    
+    static char[] characters(int n){
+        switch(n)
+        {
+            case 2: 
+				 return "abc".toCharArray();
+            
+            case 3:
+                 return "def".toCharArray();
+                
+            case 4:
+                 return "ghi".toCharArray();
+                
+            case 5:
+                 return "jkl".toCharArray();
+            
+            case 6:
+                return "mno".toCharArray();
+                
+            case 7:
+                 return "pqrs".toCharArray();
+             
+            case 8:
+                 return "tuv".toCharArray();
+                
+            case 9:
+                 return "wxyz".toCharArray();
+                
+            default:
+                char ch[] = {' '};
+                return ch;
+        }
+         
+    }
+    
+}
+
