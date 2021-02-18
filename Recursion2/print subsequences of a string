@@ -1,0 +1,19 @@
+package recursion;
+
+public class printSubsequences {
+
+	private static void printAllSubsequences(String str, String outSoFar) {
+		if(str.length() == 0) {
+			System.out.println(outSoFar);
+			return;
+		}
+		
+		printAllSubsequences(str.substring(1), outSoFar);
+		printAllSubsequences(str.substring(1), outSoFar + str.charAt(0));
+	}
+	
+	public static void main(String[] args) {
+		printAllSubsequences("abc", "");
+	}
+
+}
